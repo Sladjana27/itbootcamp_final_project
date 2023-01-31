@@ -106,7 +106,7 @@ public class LoginTests extends BaseTest {
 
         driver.get("https://vue-demo.daniel-avellaneda.com/home");
         String actualURL = driver.getCurrentUrl();
-        
+
         softAssert.assertTrue(actualURL.contains("/login"), "TestHomeRoute");
         softAssert.assertAll();
     }

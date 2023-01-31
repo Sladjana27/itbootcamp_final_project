@@ -27,4 +27,14 @@ public class SignupPage extends BasePage {
     public SignupPage(WebDriver driver) {
         super(driver);
     }
+
+    public void fillSignupFields(String name, String email, String password, String confirmPassword) {
+        this.name.sendKeys(name);
+        this.email.sendKeys(email);
+        this.password.sendKeys(password);
+        this.confirmPassword.sendKeys(confirmPassword);
+        signMeUpButton.click();
+    }
+
+
 }

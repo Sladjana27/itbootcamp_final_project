@@ -41,4 +41,9 @@ public class HomePage extends BasePage {
         logoutButton.isDisplayed();
         return true;
     }
+
+    public void clickSignup() {
+        signupButton.click();
+    }
+
 }
