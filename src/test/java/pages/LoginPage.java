@@ -43,10 +43,8 @@ public class LoginPage extends BasePage {
         return passwordField;
     }
 
-    public WebElement getMessage() {
-        return message;
+    public String getMessage() {
+        return message.getText();
     }
-//    public String getMessage(){
-//        return message.getText();
-//    }
+
 }

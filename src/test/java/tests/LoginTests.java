@@ -1,6 +1,7 @@
 package tests;
 
 import com.github.javafaker.Faker;
+import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
@@ -34,17 +35,18 @@ public class LoginTests extends BaseTest {
     public void beforeMethod() {
         super.beforeMethod();
         homePage.getLoginButtonHomePage().click();
+        explicitWait.until(ExpectedConditions.visibilityOf(loginPage.getEmailField()));
     }
 
     @Test
     public void visitLoginPage() {
         String actualURL = driver.getCurrentUrl();
+        loginPage.waiter("/login");
         Assert.assertTrue(actualURL.contains("/login"));
     }
 
     @Test
     public void checkInputTypes() {
-        explicitWait.until(ExpectedConditions.visibilityOf(loginPage.getEmailField()));
         String actualEmail = loginPage.getEmailField().getAttribute("type");
         String expectedEmail = "email";
 
@@ -59,8 +61,8 @@ public class LoginTests extends BaseTest {
     public void loginWhenUserNotExists() {
         loginPage.login(faker.internet().emailAddress(), faker.internet().password());
 
-        explicitWait.until(ExpectedConditions.textToBePresentInElement(loginPage.getMessage(), "User does not exists"));
-        String actualMessage = loginPage.getMessage().getText();
+        explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "User does not exists"));
+        String actualMessage = loginPage.getMessage();
         String expectedMessage = "User does not exists";
         String actualURL = driver.getCurrentUrl();
 
@@ -71,16 +73,41 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginWithInvalidPassword() {
-        explicitWait.until(ExpectedConditions.visibilityOf(loginPage.getEmailField()));
         loginPage.login("admin@admin.com", faker.internet().password());
 
-        explicitWait.until(ExpectedConditions.textToBePresentInElement(loginPage.getMessage(), "Wrong password"));
-        String actualMessage = loginPage.getMessage().getText();
+        explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "Wrong password"));
+        String actualMessage = loginPage.getMessage();
         String expectedMessage = "Wrong password";
         String actualURL = driver.getCurrentUrl();
 
         softAssert.assertEquals(actualMessage, expectedMessage, "TestMessage");
         softAssert.assertTrue(actualURL.contains("/login"));
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void loginWithValidInf() {
+        loginPage.login("admin@admin.com", "12345");
+        loginPage.waiter("/home");
+        String actualURL = driver.getCurrentUrl();
+
+        Assert.assertTrue(actualURL.contains("/home"));
+
+        homePage.logout();
+    }
+
+    @Test
+    public void logout() {
+        loginPage.login("admin@admin.com", "12345");
+        softAssert.assertTrue(homePage.isLogoutPresent(), "TestLogoutPresent");
+
+        homePage.logout();
+        softAssert.assertTrue(driver.getCurrentUrl().contains("/login"), "TestURL");
+
+        driver.get("https://vue-demo.daniel-avellaneda.com/home");
+        String actualURL = driver.getCurrentUrl();
+        
+        softAssert.assertTrue(actualURL.contains("/login"), "TestHomeRoute");
         softAssert.assertAll();
     }
 }
