@@ -28,6 +28,18 @@ public class SignupPage extends BasePage {
         super(driver);
     }
 
+    public WebElement getEmail() {
+        return email;
+    }
+
+    public WebElement getPassword() {
+        return password;
+    }
+
+    public WebElement getConfirmPassword() {
+        return confirmPassword;
+    }
+
     public void fillSignupFields(String name, String email, String password, String confirmPassword) {
         this.name.sendKeys(name);
         this.email.sendKeys(email);

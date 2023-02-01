@@ -16,7 +16,6 @@ public class LoginTests extends BaseTest {
 
     private HomePage homePage;
     private LoginPage loginPage;
-    private SoftAssert softAssert;
     protected Faker faker;
 
 
@@ -26,7 +25,6 @@ public class LoginTests extends BaseTest {
         super.beforeClass();
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-        softAssert = new SoftAssert();
         faker = new Faker();
     }
 
@@ -47,10 +45,10 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void checkInputTypes() {
-        String actualEmail = loginPage.getEmailField().getAttribute("type");
+        String actualEmail = loginPage.checkType(loginPage.getEmailField());
         String expectedEmail = "email";
 
-        String actualPassword = loginPage.getPasswordField().getAttribute("type");
+        String actualPassword = loginPage.checkType(loginPage.getPasswordField());
         String expectedPassword = "password";
         softAssert.assertEquals(actualEmail, expectedEmail, "TestEmail");
         softAssert.assertEquals(actualPassword, expectedPassword, "TestPassword");

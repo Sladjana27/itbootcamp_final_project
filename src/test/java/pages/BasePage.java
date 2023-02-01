@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -20,5 +21,9 @@ public abstract class BasePage {
 
     public void waiter(String text) {
         explicitWait.until(ExpectedConditions.urlContains(text));
+    }
+
+    public String checkType(WebElement webElement) {
+        return webElement.getAttribute("type");
     }
 }
