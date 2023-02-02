@@ -63,7 +63,7 @@ public class SignupTests extends BaseTest {
 
     @Test
     public void signupWithValidInformation() {
-        signupPage.fillSignupFields("Sladjana Vreco", "sladjana11111@gmail.com", "123456", "123456");
+        signupPage.fillSignupFields("Sladjana Vreco", "sladjana111111@gmail.com", "123456", "123456");
         String expectedMessage = "IMPORTANT: Verify your account";
         String actualMessage = homePage.getMessage(homePage.getSignupMessage());
 
