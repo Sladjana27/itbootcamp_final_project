@@ -44,9 +44,31 @@ public class SignupTests extends BaseTest {
 
         String actualConfirmPassword = signupPage.checkType(signupPage.getConfirmPassword());
 
-        softAssert.assertEquals(actualEmail, expectedEmail);
-        softAssert.assertEquals(actualPassword, expectedPassword);
-        softAssert.assertEquals(actualConfirmPassword, expectedPassword);
+        softAssert.assertEquals(actualEmail, expectedEmail, "TestTypeEmail");
+        softAssert.assertEquals(actualPassword, expectedPassword, "TestTypePassword");
+        softAssert.assertEquals(actualConfirmPassword, expectedPassword, "TestTypeConfirmPassword");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void signupWithExistingUser() {
+        signupPage.fillSignupFields("Test Test", "admin@admin.com", "123654", "123654");
+        String expectedMessage = "E-mail already exists";
+        String actualMessage = signupPage.getMessage(signupPage.getMessage());
+
+        softAssert.assertEquals(actualMessage, expectedMessage, "TestMessage");
+        softAssert.assertTrue(driver.getCurrentUrl().contains("/signup"), "TestURL");
+        softAssert.assertAll();
+    }
+
+    @Test
+    public void signupWithValidInformation() {
+        signupPage.fillSignupFields("Sladjana Vreco", "sladjana11111@gmail.com", "123456", "123456");
+        String expectedMessage = "IMPORTANT: Verify your account";
+        String actualMessage = homePage.getMessage(homePage.getSignupMessage());
+
+        Assert.assertEquals(actualMessage, expectedMessage);
+        homePage.closeMessage();
+        homePage.logout();
     }
 }

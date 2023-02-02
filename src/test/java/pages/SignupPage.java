@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class SignupPage extends BasePage {
 
@@ -40,13 +41,16 @@ public class SignupPage extends BasePage {
         return confirmPassword;
     }
 
+    public WebElement getMessage() {
+        return message;
+    }
+
     public void fillSignupFields(String name, String email, String password, String confirmPassword) {
+        explicitWait.until(ExpectedConditions.visibilityOf(this.name));
         this.name.sendKeys(name);
         this.email.sendKeys(email);
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(confirmPassword);
         signMeUpButton.click();
     }
-
-
 }

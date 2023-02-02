@@ -26,4 +26,9 @@ public abstract class BasePage {
     public String checkType(WebElement webElement) {
         return webElement.getAttribute("type");
     }
+
+    public String getMessage(WebElement messageField) {
+        explicitWait.until(ExpectedConditions.visibilityOf(messageField));
+        return messageField.getText();
+    }
 }

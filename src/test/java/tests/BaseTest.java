@@ -17,6 +17,8 @@ public abstract class BaseTest {
     protected WebDriverWait explicitWait;
     protected String baseURL = "https://vue-demo.daniel-avellaneda.com";
     protected SoftAssert softAssert;
+    protected Faker faker;
+
 
     @BeforeClass
     public void beforeClass() {
@@ -24,6 +26,7 @@ public abstract class BaseTest {
         driver = new ChromeDriver();
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
         softAssert = new SoftAssert();
+        faker = new Faker();
     }
 
     @BeforeMethod

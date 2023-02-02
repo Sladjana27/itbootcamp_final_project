@@ -30,9 +30,14 @@ public class LoginPage extends BasePage {
     }
 
     public void login(String email, String password) {
+        explicitWait.until(ExpectedConditions.visibilityOf(emailField));
         emailField.sendKeys(email);
         passwordField.sendKeys(password);
         loginButton.click();
+    }
+
+    public WebElement getMessage() {
+        return message;
     }
 
     public WebElement getEmailField() {
@@ -41,10 +46,6 @@ public class LoginPage extends BasePage {
 
     public WebElement getPasswordField() {
         return passwordField;
-    }
-
-    public String getMessage() {
-        return message.getText();
     }
 
 }

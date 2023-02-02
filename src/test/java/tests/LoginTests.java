@@ -16,7 +16,6 @@ public class LoginTests extends BaseTest {
 
     private HomePage homePage;
     private LoginPage loginPage;
-    protected Faker faker;
 
 
     @BeforeClass
@@ -25,7 +24,6 @@ public class LoginTests extends BaseTest {
         super.beforeClass();
         homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
-        faker = new Faker();
     }
 
     @BeforeMethod
@@ -60,7 +58,7 @@ public class LoginTests extends BaseTest {
         loginPage.login(faker.internet().emailAddress(), faker.internet().password());
 
         explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "User does not exists"));
-        String actualMessage = loginPage.getMessage();
+        String actualMessage = loginPage.getMessage(loginPage.getMessage());
         String expectedMessage = "User does not exists";
         String actualURL = driver.getCurrentUrl();
 
@@ -74,12 +72,12 @@ public class LoginTests extends BaseTest {
         loginPage.login("admin@admin.com", faker.internet().password());
 
         explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "Wrong password"));
-        String actualMessage = loginPage.getMessage();
+        String actualMessage = loginPage.getMessage(loginPage.getMessage());
         String expectedMessage = "Wrong password";
         String actualURL = driver.getCurrentUrl();
 
         softAssert.assertEquals(actualMessage, expectedMessage, "TestMessage");
-        softAssert.assertTrue(actualURL.contains("/login"));
+        softAssert.assertTrue(actualURL.contains("/login"), "TestURL");
         softAssert.assertAll();
     }
 
