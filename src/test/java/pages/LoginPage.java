@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
         homePage = new HomePage(driver);
     }
 
-    public void login(String email, String password) {
+    public void fillLogin(String email, String password) {
         explicitWait.until(ExpectedConditions.visibilityOf(emailField));
         emailField.sendKeys(email);
         passwordField.sendKeys(password);

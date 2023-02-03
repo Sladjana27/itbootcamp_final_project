@@ -101,6 +101,11 @@ public class HomePage extends BasePage {
         adminCitiesButton.click();
     }
 
+    public void clickMyProfile() {
+        explicitWait.until(ExpectedConditions.visibilityOf(profileButton));
+        profileButton.click();
+    }
+
     public String getHeaderText() {
         return header.getText();
     }

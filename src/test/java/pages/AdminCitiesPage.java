@@ -38,13 +38,13 @@ public class AdminCitiesPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span")
     private WebElement deleteButton;
-    private HomePage homePage;
     private LoginPage loginPage;
+    private HomePage homePage;
 
     public AdminCitiesPage(WebDriver driver) {
         super(driver);
-        homePage = new HomePage(driver);
         loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
     }
 
     public WebElement getMessage() {

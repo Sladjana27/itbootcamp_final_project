@@ -25,8 +25,11 @@ public class SignupPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li")
     private WebElement message;
 
+    private HomePage homePage;
+
     public SignupPage(WebDriver driver) {
         super(driver);
+        homePage = new HomePage(driver);
     }
 
     public WebElement getEmail() {

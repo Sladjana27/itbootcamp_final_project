@@ -1,22 +1,23 @@
 package pages;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ProfilePage extends BasePage {
+import java.util.List;
 
-    private HomePage homePage;
-    private City city;
+public class ProfilePage extends BasePage {
 
     @FindBy(id = "phone")
     private WebElement phoneField;
 
-    @FindBy(id = "country")
+    @FindBy(xpath = "//*[@id=\"country\"]")
     private WebElement countryField;
 
-    @FindBy(id = "urlTwitter")
+    @FindBy(xpath = "//*[@id=\"urlTwitter\"]")
     private WebElement twitterField;
 
     @FindBy(id = "urlGitHub")
@@ -25,37 +26,7 @@ public class ProfilePage extends BasePage {
     @FindBy(id = "city")
     private WebElement cityField;
 
-    @FindBy(css = "#list-item-207-0 > div > div")
-    private WebElement cityBarranquilla;
-
-    @FindBy(css = "#list-item-207-1 > div > div")
-    private WebElement cityBogota;
-
-    @FindBy(css = "#list-item-207-2 > div > div")
-    private WebElement cityBucaramanaga;
-
-    @FindBy(css = "#list-item-207-3 > div > div")
-    private WebElement cityCali;
-
-    @FindBy(css = "#list-item-207-4 > div > div")
-    private WebElement cityChicago;
-
-    @FindBy(css = "#list-item-207-5 > div > div")
-    private WebElement cityMedellin;
-
-    @FindBy(css = "#list-item-207-6 > div > div")
-    private WebElement cityNewYork;
-
-    @FindBy(css = "#list-item-207-7 > div > div")
-    private WebElement cityOakland;
-
-    @FindBy(css = "#list-item-207-8 > div > div")
-    private WebElement citySanFrancisco;
-
-    @FindBy(css = "#list-item-207-9 > div > div")
-    private WebElement citySanLeandro;
-
-    @FindBy(className = "btnSave")
+    @FindBy(xpath = "/html/body/div/div[1]/main/div/div[2]/div/div/div[2]/span/form/div/div/div[8]/button")
     private WebElement saveButton;
 
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")
@@ -63,61 +34,46 @@ public class ProfilePage extends BasePage {
 
     public ProfilePage(WebDriver driver) {
         super(driver);
-        homePage = new HomePage(driver);
     }
 
     public WebElement getMessage() {
         return message;
     }
 
-    public void chooseCity(City city) {
-        cityField.click();
-        switch (city) {
-            case Barranquilla:
-                cityBarranquilla.click();
-                break;
-            case Bogota:
-                cityBogota.click();
-                break;
-            case Bucaramanga:
-                cityBucaramanaga.click();
-                break;
-            case Cali:
-                cityCali.click();
-                break;
-            case Chicago:
-                cityChicago.click();
-                break;
-            case Medellin:
-                cityMedellin.click();
-                break;
-            case NewYork:
-                cityNewYork.click();
-                break;
-            case Oakland:
-                cityOakland.click();
-                break;
-            case SanFrancisco:
-                citySanFrancisco.click();
-                break;
-            case SanLeandro:
-                citySanLeandro.click();
-                break;
-        }
+    public WebElement getPhoneField() {
+        return phoneField;
     }
 
-    private void fillMyProfile(String phone, City city, String country, String twitter, String gitHub) {
+    public WebElement getCountryField() {
+        return countryField;
+    }
+
+    public WebElement getTwitterField() {
+        return twitterField;
+    }
+
+    public WebElement getGitHubField() {
+        return gitHubField;
+    }
+
+    public String getValue(WebElement webElement) {
+        return webElement.getAttribute("value");
+    }
+
+    public void fillMyProfile(String phone, String country, String twitter, String gitHub, String city) {
         explicitWait.until(ExpectedConditions.visibilityOf(phoneField));
-        this.phoneField.clear();
-        this.countryField.clear();
-        this.twitterField.clear();
-        this.gitHubField.clear();
+        this.phoneField.sendKeys(Keys.CONTROL + "a");
         this.phoneField.sendKeys(phone);
-        chooseCity(city);
-        this.countryField.sendKeys(country);
+        this.twitterField.sendKeys(Keys.CONTROL + "a");
         this.twitterField.sendKeys(twitter);
+        this.countryField.sendKeys(Keys.CONTROL + "a");
+        this.countryField.sendKeys(country);
+        this.gitHubField.sendKeys(Keys.CONTROL + "a");
         this.gitHubField.sendKeys(gitHub);
-        saveButton.click();
+        this.cityField.sendKeys(Keys.SPACE);
+        this.cityField.sendKeys(Keys.CONTROL + "a");
+        this.cityField.sendKeys(city);
+        this.cityField.sendKeys(Keys.ARROW_DOWN);
+        this.cityField.sendKeys(Keys.ENTER);
     }
-
 }

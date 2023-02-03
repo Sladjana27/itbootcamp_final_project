@@ -12,7 +12,6 @@ public class AdminCitiesTests extends BaseTest{
     private LoginPage loginPage;
     private AdminCitiesPage adminCitiesPage;
     private String cityFakerName;
-
     private String editedCityName;
 
     @BeforeClass
@@ -31,7 +30,7 @@ public class AdminCitiesTests extends BaseTest{
     public void beforeMethod() {
         super.beforeMethod();
         homePage.getLoginButtonHomePage().click();
-        loginPage.login("admin@admin.com", "12345");
+        loginPage.fillLogin("admin@admin.com", "12345");
         homePage.clickAdminCities();
     }
 

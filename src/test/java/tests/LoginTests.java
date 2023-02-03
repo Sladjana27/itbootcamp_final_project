@@ -55,7 +55,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginWhenUserNotExists() {
-        loginPage.login(faker.internet().emailAddress(), faker.internet().password());
+        loginPage.fillLogin(faker.internet().emailAddress(), faker.internet().password());
 
         explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "User does not exists"));
         String actualMessage = loginPage.getMessage(loginPage.getMessage());
@@ -69,7 +69,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginWithInvalidPassword() {
-        loginPage.login("admin@admin.com", faker.internet().password());
+        loginPage.fillLogin("admin@admin.com", faker.internet().password());
 
         explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "Wrong password"));
         String actualMessage = loginPage.getMessage(loginPage.getMessage());
@@ -83,7 +83,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void loginWithValidInf() {
-        loginPage.login("admin@admin.com", "12345");
+        loginPage.fillLogin("admin@admin.com", "12345");
         loginPage.waiter("/home");
         String actualURL = driver.getCurrentUrl();
 
@@ -94,7 +94,7 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void logout() {
-        loginPage.login("admin@admin.com", "12345");
+        loginPage.fillLogin("admin@admin.com", "12345");
         softAssert.assertTrue(homePage.isLogoutPresent(), "TestLogoutPresent");
 
         homePage.logout();

@@ -12,7 +12,6 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait explicitWait;
 
-
     public BasePage(WebDriver driver) {
         this.driver = driver;
         explicitWait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
