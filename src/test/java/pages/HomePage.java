@@ -50,6 +50,9 @@ public class HomePage extends BasePage {
     @FindBy(className = "btnUA")
     private WebElement ua;
 
+    @FindBy(className = "btnProfile")
+    private WebElement profileButton;
+
     private Languages languages;
 
     public HomePage(WebDriver driver) {
@@ -58,6 +61,10 @@ public class HomePage extends BasePage {
 
     public WebElement getSignupButton() {
         return signupButton;
+    }
+
+    public WebElement getProfileButton() {
+        return profileButton;
     }
 
     public WebElement getLoginButtonHomePage() {
@@ -101,7 +108,7 @@ public class HomePage extends BasePage {
     public void setLanguage(Languages chooselanguages) {
         languageButton.click();
         explicitWait.until(ExpectedConditions.visibilityOf(es));
-        switch (chooselanguages){
+        switch (chooselanguages) {
             case EN:
                 en.click();
                 break;
