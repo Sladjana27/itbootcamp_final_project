@@ -14,7 +14,7 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/a[3]/span")
     private WebElement loginButtonHomePage;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div/div/header/div/div[3]/button/span")
+    @FindBy(className = "btnLocaleActivation")
     private WebElement languageButton;
 
     @FindBy(className = "btnLogout")
@@ -31,6 +31,26 @@ public class HomePage extends BasePage {
 
     @FindBy(className = "btnAdminCities")
     private WebElement adminCitiesButton;
+
+    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/h1")
+    private WebElement header;
+
+    @FindBy(className = "btnEN")
+    private WebElement en;
+
+    @FindBy(className = "btnES")
+    private WebElement es;
+
+    @FindBy(className = "btnFR")
+    private WebElement fr;
+
+    @FindBy(className = "btnCN")
+    private WebElement cn;
+
+    @FindBy(className = "btnUA")
+    private WebElement ua;
+
+    private Languages languages;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -72,5 +92,31 @@ public class HomePage extends BasePage {
         explicitWait.until(ExpectedConditions.visibilityOf(adminButton));
         adminButton.click();
         adminCitiesButton.click();
+    }
+
+    public String getHeaderText() {
+        return header.getText();
+    }
+
+    public void setLanguage(Languages chooselanguages) {
+        languageButton.click();
+        explicitWait.until(ExpectedConditions.visibilityOf(es));
+        switch (chooselanguages){
+            case EN:
+                en.click();
+                break;
+            case ES:
+                es.click();
+                break;
+            case FR:
+                fr.click();
+                break;
+            case CN:
+                cn.click();
+                break;
+            case UA:
+                ua.click();
+                break;
+        }
     }
 }
