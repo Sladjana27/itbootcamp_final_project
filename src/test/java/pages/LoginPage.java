@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends BasePage {
 
@@ -25,11 +26,8 @@ public class LoginPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/button/span")
     private WebElement closeMessage;
 
-    private HomePage homePage;
-
-    public LoginPage(WebDriver driver) {
-        super(driver);
-        homePage = new HomePage(driver);
+    public LoginPage(WebDriver driver, WebDriverWait explicitWait) {
+        super(driver, explicitWait);
     }
 
     public void fillLogin(String email, String password) {

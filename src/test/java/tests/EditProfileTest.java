@@ -19,9 +19,9 @@ public class EditProfileTest extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        profilePage = new ProfilePage(driver);
-        homePage = new HomePage(driver);
-        loginPage = new LoginPage(driver);
+        profilePage = new ProfilePage(driver, explicitWait);
+        homePage = new HomePage(driver, explicitWait);
+        loginPage = new LoginPage(driver, explicitWait);
         phoneNumber = faker.phoneNumber().phoneNumber();
         twitter = "https://" + faker.internet().url();
         gitHub = "https://" + faker.internet().url();

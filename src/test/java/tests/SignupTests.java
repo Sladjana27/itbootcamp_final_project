@@ -16,8 +16,8 @@ public class SignupTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        signupPage = new SignupPage(driver);
-        homePage = new HomePage(driver);
+        signupPage = new SignupPage(driver, explicitWait);
+        homePage = new HomePage(driver, explicitWait);
     }
 
     @BeforeMethod

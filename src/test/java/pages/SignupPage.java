@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignupPage extends BasePage {
 
@@ -25,11 +26,8 @@ public class SignupPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li")
     private WebElement message;
 
-    private HomePage homePage;
-
-    public SignupPage(WebDriver driver) {
-        super(driver);
-        homePage = new HomePage(driver);
+    public SignupPage(WebDriver driver, WebDriverWait explicitWait) {
+        super(driver, explicitWait);
     }
 
     public WebElement getEmail() {

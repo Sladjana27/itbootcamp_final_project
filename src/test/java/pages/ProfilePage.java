@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -32,8 +33,8 @@ public class ProfilePage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]")
     private WebElement message;
 
-    public ProfilePage(WebDriver driver) {
-        super(driver);
+    public ProfilePage(WebDriver driver, WebDriverWait explicitWait) {
+        super(driver, explicitWait);
     }
 
     public WebElement getMessage() {

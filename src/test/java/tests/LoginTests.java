@@ -22,8 +22,8 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        homePage = new HomePage(driver);
-        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver, explicitWait);
+        loginPage = new LoginPage(driver, explicitWait);
     }
 
     @BeforeMethod

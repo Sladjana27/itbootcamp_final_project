@@ -13,7 +13,7 @@ public class LocaleTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        homePage = new HomePage(driver);
+        homePage = new HomePage(driver, explicitWait);
     }
 
     @Test

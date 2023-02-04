@@ -8,6 +8,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.asserts.SoftAssert;
+import pages.HomePage;
 
 import java.time.Duration;
 
@@ -18,12 +19,14 @@ public abstract class BaseTest {
     protected String baseURL = "https://vue-demo.daniel-avellaneda.com";
     protected SoftAssert softAssert;
     protected Faker faker;
+    protected HomePage homePage;
 
 
     @BeforeClass
     public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lenovo\\Desktop\\ITBootamp\\Chromedriver\\chromedriver.exe");
         driver = new ChromeDriver();
+        homePage = new HomePage(driver, explicitWait);
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(15));
         softAssert = new SoftAssert();
         faker = new Faker();

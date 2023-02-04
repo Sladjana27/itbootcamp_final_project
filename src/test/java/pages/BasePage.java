@@ -12,9 +12,9 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected WebDriverWait explicitWait;
 
-    public BasePage(WebDriver driver) {
+    public BasePage(WebDriver driver, WebDriverWait explicitWait) {
         this.driver = driver;
-        explicitWait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
+        this.explicitWait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
         PageFactory.initElements(this.driver, this);
     }
 
