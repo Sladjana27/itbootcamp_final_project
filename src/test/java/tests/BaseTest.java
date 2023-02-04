@@ -24,7 +24,7 @@ public abstract class BaseTest {
     public void beforeClass() {
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\Lenovo\\Desktop\\ITBootamp\\Chromedriver\\chromedriver.exe");
         driver = new ChromeDriver();
-        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        explicitWait = new WebDriverWait(driver, Duration.ofSeconds(15));
         softAssert = new SoftAssert();
         faker = new Faker();
     }

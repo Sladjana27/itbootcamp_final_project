@@ -1,28 +1,27 @@
 package tests;
 
 import org.openqa.selenium.bidi.log.Log;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import pages.AdminCitiesPage;
 import pages.HomePage;
 import pages.LoginPage;
 
-public class AdminCitiesTests extends BaseTest{
+public class AdminCitiesTests extends BaseTest {
     private HomePage homePage;
     private LoginPage loginPage;
     private AdminCitiesPage adminCitiesPage;
     private String cityFakerName;
-    private String editedCityName;
 
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
         homePage = new HomePage(driver);
-        loginPage =  new LoginPage(driver);
+        loginPage = new LoginPage(driver);
         adminCitiesPage = new AdminCitiesPage(driver);
         cityFakerName = faker.address().cityName();
-        editedCityName = cityFakerName + " " + cityFakerName + " - edited";
     }
 
     @BeforeMethod
@@ -39,46 +38,59 @@ public class AdminCitiesTests extends BaseTest{
         homePage.logout();
     }
 
-    @Test (priority = 1)
+    @Test
     public void visitAdminCitiesPage() {
+        explicitWait.until(ExpectedConditions.urlContains("/admin/cities"));
         String actualURL = driver.getCurrentUrl();
+
         softAssert.assertTrue(actualURL.contains("/admin/cities"), "TestURL");
         softAssert.assertTrue(homePage.isLogoutPresent(), "TestVisibilityofLogoutButton");
         softAssert.assertAll();
     }
 
-    @Test (priority = 2)
+    @Test
     public void createNewCity() {
         adminCitiesPage.createNewCity(cityFakerName);
         String actualMessage = homePage.getMessage(adminCitiesPage.getMessage());
         Assert.assertTrue(actualMessage.contains("Saved successfully"));
     }
 
-    @Test (priority = 3)
+    @Test
     public void editCityName() {
+        adminCitiesPage.createNewCity(cityFakerName);
+        try {
+            Thread.sleep(1500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         adminCitiesPage.searchCities(cityFakerName);
-        adminCitiesPage.editCityName(" " + cityFakerName + " - edited");
+        adminCitiesPage.editCityName(cityFakerName);
         String actualMessage = homePage.getMessage(adminCitiesPage.getMessage());
+
         Assert.assertTrue(actualMessage.contains("Saved successfully"));
     }
-    @Test (priority = 4)
-    public void searchCityName() {
-        adminCitiesPage.searchCities(editedCityName);
 
-        String expectedCityName = editedCityName;
+    @Test
+    public void searchCityName() {
+        adminCitiesPage.flowMethod(cityFakerName);
+
+        String expectedCityName = adminCitiesPage.editedCityName(cityFakerName);
         String actualCityName = adminCitiesPage.getCityNameInTable();
 
         Assert.assertEquals(actualCityName, expectedCityName);
     }
 
-    @Test (priority = 5)
+    @Test
     public void deleteCity() {
-        adminCitiesPage.searchCities(editedCityName);
-        softAssert.assertEquals(adminCitiesPage.getCityNameInTable(), editedCityName, "TestSearch");
+        adminCitiesPage.flowMethod(cityFakerName);
+
+        String expectedResult = adminCitiesPage.editedCityName(cityFakerName);
+        String actualResult = adminCitiesPage.getCityNameInTable();
 
         adminCitiesPage.deleteCity();
         String actualMessage = homePage.getMessage(adminCitiesPage.getMessage());
 
+        softAssert.assertEquals(actualResult, expectedResult, "TestSearch");
         softAssert.assertTrue(actualMessage.contains("Deleted successfully"), "TestMessage");
         softAssert.assertAll();
     }

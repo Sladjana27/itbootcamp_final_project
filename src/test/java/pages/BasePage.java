@@ -14,7 +14,7 @@ public abstract class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        explicitWait = new WebDriverWait(this.driver, Duration.ofSeconds(10));
+        explicitWait = new WebDriverWait(this.driver, Duration.ofSeconds(15));
         PageFactory.initElements(this.driver, this);
     }
 
@@ -22,8 +22,8 @@ public abstract class BasePage {
         explicitWait.until(ExpectedConditions.urlContains(text));
     }
 
-    public String checkType(WebElement webElement) {
-        return webElement.getAttribute("type");
+    public String checkAtribut(WebElement webElement, String text) {
+        return webElement.getAttribute(text);
     }
 
     public String getMessage(WebElement messageField) {

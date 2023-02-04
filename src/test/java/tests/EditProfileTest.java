@@ -1,5 +1,6 @@
 package tests;
 
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.*;
 import pages.HomePage;
 import pages.LoginPage;
@@ -39,11 +40,11 @@ public class EditProfileTest extends BaseTest {
     @Test
     public void editsProfile() {
         profilePage.fillMyProfile(phoneNumber, country, twitter, gitHub, "Chicago");
-
-        String actualPhoneNumber = profilePage.getValue(profilePage.getPhoneField());
-        String actualCountry = profilePage.getValue(profilePage.getCountryField());
-        String actualTwitter = profilePage.getValue(profilePage.getTwitterField());
-        String actualGitHub = profilePage.getValue(profilePage.getGitHubField());
+        explicitWait.until(ExpectedConditions.visibilityOf(profilePage.getPhoneField()));
+        String actualPhoneNumber = profilePage.checkAtribut(profilePage.getPhoneField(), "value");
+        String actualCountry = profilePage.checkAtribut(profilePage.getCountryField(), "value");
+        String actualTwitter = profilePage.checkAtribut(profilePage.getTwitterField(), "value");
+        String actualGitHub = profilePage.checkAtribut(profilePage.getGitHubField(), "value");
         String actualMessage = homePage.getMessage(profilePage.getMessage());
 
         softAssert.assertEquals(actualPhoneNumber, phoneNumber, "TestPhoneNumberValue");

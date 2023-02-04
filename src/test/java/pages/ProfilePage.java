@@ -56,10 +56,6 @@ public class ProfilePage extends BasePage {
         return gitHubField;
     }
 
-    public String getValue(WebElement webElement) {
-        return webElement.getAttribute("value");
-    }
-
     public void fillMyProfile(String phone, String country, String twitter, String gitHub, String city) {
         explicitWait.until(ExpectedConditions.visibilityOf(phoneField));
         this.phoneField.sendKeys(Keys.CONTROL + "a");
@@ -75,5 +71,6 @@ public class ProfilePage extends BasePage {
         this.cityField.sendKeys(city);
         this.cityField.sendKeys(Keys.ARROW_DOWN);
         this.cityField.sendKeys(Keys.ENTER);
+        this.saveButton.click();
     }
 }

@@ -13,6 +13,9 @@ public class LoginPage extends BasePage {
     @FindBy(id = "password")
     private WebElement passwordField;
 
+    @FindBy(className = "btnForgotPassword")
+    private WebElement forgotPasswordButton;
+
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/span/form/div/div[3]/button")
     private WebElement loginButton;
 
@@ -48,4 +51,7 @@ public class LoginPage extends BasePage {
         return passwordField;
     }
 
+    public void clickForgotPassword() {
+        forgotPasswordButton.click();
+    }
 }

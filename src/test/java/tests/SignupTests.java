@@ -36,13 +36,13 @@ public class SignupTests extends BaseTest {
     @Test
     public void checkInputType() {
         explicitWait.until(ExpectedConditions.visibilityOf(signupPage.getEmail()));
-        String actualEmail = signupPage.checkType(signupPage.getEmail());
+        String actualEmail = signupPage.checkAtribut(signupPage.getEmail(), "type");
         String expectedEmail = "email";
 
-        String actualPassword = signupPage.checkType(signupPage.getPassword());
+        String actualPassword = signupPage.checkAtribut(signupPage.getPassword(), "type");
         String expectedPassword = "password";
 
-        String actualConfirmPassword = signupPage.checkType(signupPage.getConfirmPassword());
+        String actualConfirmPassword = signupPage.checkAtribut(signupPage.getConfirmPassword(), "type");
 
         softAssert.assertEquals(actualEmail, expectedEmail, "TestTypeEmail");
         softAssert.assertEquals(actualPassword, expectedPassword, "TestTypePassword");
@@ -63,7 +63,7 @@ public class SignupTests extends BaseTest {
 
     @Test
     public void signupWithValidInformation() {
-        signupPage.fillSignupFields("Sladjana Vreco", "sladjana11@gmail.com", "123456", "123456");
+        signupPage.fillSignupFields("Sladjana Vreco", faker.internet().emailAddress(), "123456", "123456");
         String expectedMessage = "IMPORTANT: Verify your account";
         String actualMessage = homePage.getMessage(homePage.getSignupMessage());
 

@@ -1,11 +1,14 @@
 package pages;
 
 import org.checkerframework.common.value.qual.MinLenFieldInvariant;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+
+import java.util.Optional;
 
 public class AdminCitiesPage extends BasePage {
 
@@ -24,20 +27,18 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"edit\"]/span")
     private WebElement editButton;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[3]/div/div/div/div/div[1]")
-    private WebElement message;
-
-    @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[1]/div[2]/div/div/div/div[3]/div")
-    private WebElement searchMagnify;
-
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div[1]/div[2]/table/tbody/tr/td[2]")
     private WebElement cityNameInTable;
 
-    @FindBy(xpath = "//*[@id=\"delete\"]/span/i")
+    @FindBy(id = "delete")
     private WebElement deleteIcon;
 
-    @FindBy(xpath = "//*[@id=\"app\"]/div[5]/div/div/div[2]/button[2]/span")
+    @FindBy(css = "#app > div.v-dialog__content.v-dialog__content--active > div > div > div.v-card__actions > button.v-btn.v-btn--text.theme--light.v-size--default.red--text.text--lighten3")
     private WebElement deleteButton;
+
+    @FindBy(className = "success")
+    private WebElement deleteMessage;
+
     private LoginPage loginPage;
     private HomePage homePage;
 
@@ -48,7 +49,8 @@ public class AdminCitiesPage extends BasePage {
     }
 
     public WebElement getMessage() {
-        return message;
+        explicitWait.until(ExpectedConditions.visibilityOf(deleteMessage));
+        return deleteMessage;
     }
 
     public void createNewCity(String nameCity) {
@@ -60,16 +62,19 @@ public class AdminCitiesPage extends BasePage {
 
     public void searchCities(String searchCity) {
         explicitWait.until(ExpectedConditions.visibilityOf(searchField));
-        searchField.clear();
+        searchField.sendKeys(Keys.CONTROL + "a");
         searchField.sendKeys(searchCity);
-        searchMagnify.click();
     }
 
     public void editCityName(String newName) {
         editButton.click();
-        nameField.click();
-        nameField.sendKeys(newName);
+        explicitWait.until(ExpectedConditions.visibilityOf(nameField));
+        nameField.sendKeys(" " + newName + " - edited");
         saveButton.click();
+    }
+
+    public String editedCityName(String cityName) {
+        return cityName + " " + cityName + " - edited";
     }
 
     public String getCityNameInTable() {
@@ -82,5 +87,28 @@ public class AdminCitiesPage extends BasePage {
         deleteIcon.click();
         explicitWait.until(ExpectedConditions.visibilityOf(deleteButton));
         deleteButton.click();
+        explicitWait.until(ExpectedConditions.textToBePresentInElement(deleteMessage, "Deleted successfully"));
+    }
+
+    public void flowMethod(String cityName) {
+        createNewCity(cityName);
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        searchCities(cityName);
+        editCityName(cityName);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        searchCities(editedCityName(cityName));
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

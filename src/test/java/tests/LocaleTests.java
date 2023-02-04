@@ -39,4 +39,20 @@ public class LocaleTests extends BaseTest {
 
         Assert.assertTrue(actualMessage.contains("Page d'atterrissage"));
     }
+
+    @Test
+    public void setLocaleToCN() {
+        homePage.setLanguage(Languages.CN);
+        String actualMessage = homePage.getHeaderText();
+
+        Assert.assertTrue(actualMessage.contains("首页"));
+    }
+
+    @Test
+    public void setLocaleToUA() {
+        homePage.setLanguage(Languages.UA);
+        String actualMessage = homePage.getHeaderText();
+
+        Assert.assertTrue(actualMessage.contains("Лендінг"));
+    }
 }

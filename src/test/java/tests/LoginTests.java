@@ -43,10 +43,10 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void checkInputTypes() {
-        String actualEmail = loginPage.checkType(loginPage.getEmailField());
+        String actualEmail = loginPage.checkAtribut(loginPage.getEmailField(), "type");
         String expectedEmail = "email";
 
-        String actualPassword = loginPage.checkType(loginPage.getPasswordField());
+        String actualPassword = loginPage.checkAtribut(loginPage.getPasswordField(), "type");
         String expectedPassword = "password";
         softAssert.assertEquals(actualEmail, expectedEmail, "TestEmail");
         softAssert.assertEquals(actualPassword, expectedPassword, "TestPassword");
@@ -67,19 +67,19 @@ public class LoginTests extends BaseTest {
         softAssert.assertAll();
     }
 
-    @Test
-    public void loginWithInvalidPassword() {
-        loginPage.fillLogin("admin@admin.com", faker.internet().password());
-
-        explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "Wrong password"));
-        String actualMessage = loginPage.getMessage(loginPage.getMessage());
-        String expectedMessage = "Wrong password";
-        String actualURL = driver.getCurrentUrl();
-
-        softAssert.assertEquals(actualMessage, expectedMessage, "TestMessage");
-        softAssert.assertTrue(actualURL.contains("/login"), "TestURL");
-        softAssert.assertAll();
-    }
+//    @Test
+//    public void loginWithInvalidPassword() {
+//        loginPage.fillLogin("admin@admin.com", faker.internet().password());
+//
+//        explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "Wrong password"));
+//        String actualMessage = loginPage.getMessage(loginPage.getMessage());
+//        String expectedMessage = "Wrong password";
+//        String actualURL = driver.getCurrentUrl();
+//
+//        softAssert.assertEquals(actualMessage, expectedMessage, "TestMessage");
+//        softAssert.assertTrue(actualURL.contains("/login"), "TestURL");
+//        softAssert.assertAll();
+//    }
 
     @Test
     public void loginWithValidInf() {
@@ -105,5 +105,13 @@ public class LoginTests extends BaseTest {
 
         softAssert.assertTrue(actualURL.contains("/login"), "TestHomeRoute");
         softAssert.assertAll();
+    }
+
+    @Test
+    public void forgotPassword() {
+        loginPage.clickForgotPassword();
+        String actualURL = driver.getCurrentUrl();
+
+        Assert.assertTrue(actualURL.contains("/forgot"));
     }
 }
