@@ -42,6 +42,7 @@ public class ProfilePage extends BasePage {
     }
 
     public WebElement getPhoneField() {
+        explicitWait.until(ExpectedConditions.visibilityOf(phoneField));
         return phoneField;
     }
 
@@ -61,12 +62,16 @@ public class ProfilePage extends BasePage {
         explicitWait.until(ExpectedConditions.visibilityOf(phoneField));
         this.phoneField.sendKeys(Keys.CONTROL + "a");
         this.phoneField.sendKeys(phone);
+
         this.twitterField.sendKeys(Keys.CONTROL + "a");
         this.twitterField.sendKeys(twitter);
+
         this.countryField.sendKeys(Keys.CONTROL + "a");
         this.countryField.sendKeys(country);
+
         this.gitHubField.sendKeys(Keys.CONTROL + "a");
         this.gitHubField.sendKeys(gitHub);
+
         this.cityField.sendKeys(Keys.SPACE);
         this.cityField.sendKeys(Keys.CONTROL + "a");
         this.cityField.sendKeys(city);

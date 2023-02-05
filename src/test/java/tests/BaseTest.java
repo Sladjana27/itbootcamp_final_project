@@ -16,7 +16,7 @@ public abstract class BaseTest {
 
     protected WebDriver driver;
     protected WebDriverWait explicitWait;
-    protected String baseURL = "https://vue-demo.daniel-avellaneda.com";
+    protected final String BASEURL = "https://vue-demo.daniel-avellaneda.com";
     protected SoftAssert softAssert;
     protected Faker faker;
     protected HomePage homePage;
@@ -34,7 +34,7 @@ public abstract class BaseTest {
 
     @BeforeMethod
     public void beforeMethod() {
-        driver.get(baseURL);
+        driver.get(BASEURL);
     }
 
     @AfterClass

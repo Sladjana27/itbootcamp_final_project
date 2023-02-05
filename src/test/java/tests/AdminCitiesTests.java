@@ -9,7 +9,6 @@ import pages.HomePage;
 import pages.LoginPage;
 
 public class AdminCitiesTests extends BaseTest {
-    private HomePage homePage;
     private LoginPage loginPage;
     private AdminCitiesPage adminCitiesPage;
     private String cityFakerName;
@@ -18,7 +17,6 @@ public class AdminCitiesTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        homePage = new HomePage(driver, explicitWait);
         loginPage = new LoginPage(driver, explicitWait);
         adminCitiesPage = new AdminCitiesPage(driver, explicitWait);
         cityFakerName = faker.address().cityName();
@@ -51,7 +49,9 @@ public class AdminCitiesTests extends BaseTest {
     @Test
     public void createNewCity() {
         adminCitiesPage.createNewCity(cityFakerName);
+
         String actualMessage = homePage.getMessage(adminCitiesPage.getMessage());
+
         Assert.assertTrue(actualMessage.contains("Saved successfully"));
     }
 
@@ -65,6 +65,7 @@ public class AdminCitiesTests extends BaseTest {
         }
         adminCitiesPage.searchCities(cityFakerName);
         adminCitiesPage.editCityName(cityFakerName);
+
         String actualMessage = homePage.getMessage(adminCitiesPage.getMessage());
 
         Assert.assertTrue(actualMessage.contains("Saved successfully"));

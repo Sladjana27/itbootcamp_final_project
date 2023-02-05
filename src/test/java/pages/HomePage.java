@@ -60,14 +60,6 @@ public class HomePage extends BasePage {
         super(driver, explicitWait);
     }
 
-    public WebElement getSignupButton() {
-        return signupButton;
-    }
-
-    public WebElement getProfileButton() {
-        return profileButton;
-    }
-
     public WebElement getLoginButtonHomePage() {
         return loginButtonHomePage;
     }
@@ -111,10 +103,11 @@ public class HomePage extends BasePage {
         return header.getText();
     }
 
-    public void setLanguage(Languages chooselanguages) {
+    public void setLanguage(Languages choosselanguage) {
         languageButton.click();
         explicitWait.until(ExpectedConditions.visibilityOf(es));
-        switch (chooselanguages) {
+
+        switch (choosselanguage) {
             case EN:
                 en.click();
                 break;
@@ -131,5 +124,9 @@ public class HomePage extends BasePage {
                 ua.click();
                 break;
         }
+    }
+
+    public void navigate(String url) {
+        driver.navigate().to(url);
     }
 }

@@ -10,14 +10,12 @@ import pages.SignupPage;
 
 public class SignupTests extends BaseTest {
     private SignupPage signupPage;
-    private HomePage homePage;
 
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
         signupPage = new SignupPage(driver, explicitWait);
-        homePage = new HomePage(driver, explicitWait);
     }
 
     @BeforeMethod
@@ -29,7 +27,9 @@ public class SignupTests extends BaseTest {
 
     @Test
     public void visitSignUpPage() {
+        signupPage.waitURL("https://vue-demo.daniel-avellaneda.com/signup");
         String actualURL = driver.getCurrentUrl();
+
         Assert.assertTrue(actualURL.contains("/signup"));
     }
 
@@ -38,10 +38,8 @@ public class SignupTests extends BaseTest {
         explicitWait.until(ExpectedConditions.visibilityOf(signupPage.getEmail()));
         String actualEmail = signupPage.checkAtribut(signupPage.getEmail(), "type");
         String expectedEmail = "email";
-
         String actualPassword = signupPage.checkAtribut(signupPage.getPassword(), "type");
         String expectedPassword = "password";
-
         String actualConfirmPassword = signupPage.checkAtribut(signupPage.getConfirmPassword(), "type");
 
         softAssert.assertEquals(actualEmail, expectedEmail, "TestTypeEmail");
@@ -53,6 +51,7 @@ public class SignupTests extends BaseTest {
     @Test
     public void signupWithExistingUser() {
         signupPage.fillSignupFields("Test Test", "admin@admin.com", "123654", "123654");
+
         String expectedMessage = "E-mail already exists";
         String actualMessage = signupPage.getMessage(signupPage.getMessage());
 
@@ -64,6 +63,7 @@ public class SignupTests extends BaseTest {
     @Test
     public void signupWithValidInformation() {
         signupPage.fillSignupFields("Sladjana Vreco", faker.internet().emailAddress(), "123456", "123456");
+
         String expectedMessage = "IMPORTANT: Verify your account";
         String actualMessage = homePage.getMessage(homePage.getSignupMessage());
 

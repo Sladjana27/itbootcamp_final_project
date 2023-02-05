@@ -7,18 +7,17 @@ import pages.HomePage;
 import pages.Languages;
 
 public class LocaleTests extends BaseTest {
-    private HomePage homePage;
 
     @BeforeClass
     @Override
     public void beforeClass() {
         super.beforeClass();
-        homePage = new HomePage(driver, explicitWait);
     }
 
     @Test
     public void setLocaleToES() {
         homePage.setLanguage(Languages.ES);
+
         String actualMessage = homePage.getHeaderText();
 
         Assert.assertTrue(actualMessage.contains("Página de aterrizaje"));
@@ -27,6 +26,7 @@ public class LocaleTests extends BaseTest {
     @Test
     public void setLocaleToEN() {
         homePage.setLanguage(Languages.EN);
+
         String actualMessage = homePage.getHeaderText();
 
         Assert.assertTrue(actualMessage.contains("Landing"));
@@ -35,6 +35,7 @@ public class LocaleTests extends BaseTest {
     @Test
     public void setLocaleToFR() {
         homePage.setLanguage(Languages.FR);
+
         String actualMessage = homePage.getHeaderText();
 
         Assert.assertTrue(actualMessage.contains("Page d'atterrissage"));
@@ -43,6 +44,7 @@ public class LocaleTests extends BaseTest {
     @Test
     public void setLocaleToCN() {
         homePage.setLanguage(Languages.CN);
+
         String actualMessage = homePage.getHeaderText();
 
         Assert.assertTrue(actualMessage.contains("首页"));
@@ -51,6 +53,7 @@ public class LocaleTests extends BaseTest {
     @Test
     public void setLocaleToUA() {
         homePage.setLanguage(Languages.UA);
+
         String actualMessage = homePage.getHeaderText();
 
         Assert.assertTrue(actualMessage.contains("Лендінг"));

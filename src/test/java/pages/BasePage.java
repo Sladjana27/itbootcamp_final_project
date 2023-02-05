@@ -18,7 +18,7 @@ public abstract class BasePage {
         PageFactory.initElements(this.driver, this);
     }
 
-    public void waiter(String text) {
+    public void waitURL(String text) {
         explicitWait.until(ExpectedConditions.urlContains(text));
     }
 

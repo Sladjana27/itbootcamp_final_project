@@ -8,7 +8,6 @@ import pages.ProfilePage;
 
 public class EditProfileTest extends BaseTest {
     private ProfilePage profilePage;
-    private HomePage homePage;
     private LoginPage loginPage;
     private String phoneNumber;
     private String twitter;
@@ -20,7 +19,6 @@ public class EditProfileTest extends BaseTest {
     public void beforeClass() {
         super.beforeClass();
         profilePage = new ProfilePage(driver, explicitWait);
-        homePage = new HomePage(driver, explicitWait);
         loginPage = new LoginPage(driver, explicitWait);
         phoneNumber = faker.phoneNumber().phoneNumber();
         twitter = "https://" + faker.internet().url();
@@ -40,7 +38,7 @@ public class EditProfileTest extends BaseTest {
     @Test
     public void editsProfile() {
         profilePage.fillMyProfile(phoneNumber, country, twitter, gitHub, "Chicago");
-        explicitWait.until(ExpectedConditions.visibilityOf(profilePage.getPhoneField()));
+
         String actualPhoneNumber = profilePage.checkAtribut(profilePage.getPhoneField(), "value");
         String actualCountry = profilePage.checkAtribut(profilePage.getCountryField(), "value");
         String actualTwitter = profilePage.checkAtribut(profilePage.getTwitterField(), "value");
