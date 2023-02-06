@@ -39,10 +39,10 @@ public class EditProfileTest extends BaseTest {
     public void editsProfile() {
         profilePage.fillMyProfile(phoneNumber, country, twitter, gitHub, "Chicago");
 
-        String actualPhoneNumber = profilePage.checkAtribut(profilePage.getPhoneField(), "value");
-        String actualCountry = profilePage.checkAtribut(profilePage.getCountryField(), "value");
-        String actualTwitter = profilePage.checkAtribut(profilePage.getTwitterField(), "value");
-        String actualGitHub = profilePage.checkAtribut(profilePage.getGitHubField(), "value");
+        String actualPhoneNumber = profilePage.checkAtributte(profilePage.getPhoneField(), "value");
+        String actualCountry = profilePage.checkAtributte(profilePage.getCountryField(), "value");
+        String actualTwitter = profilePage.checkAtributte(profilePage.getTwitterField(), "value");
+        String actualGitHub = profilePage.checkAtributte(profilePage.getGitHubField(), "value");
         String actualMessage = homePage.getMessage(profilePage.getMessage());
 
         softAssert.assertEquals(actualPhoneNumber, phoneNumber, "TestPhoneNumberValue");

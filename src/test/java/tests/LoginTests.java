@@ -40,9 +40,9 @@ public class LoginTests extends BaseTest {
 
     @Test
     public void checkInputTypes() {
-        String actualEmail = loginPage.checkAtribut(loginPage.getEmailField(), "type");
+        String actualEmail = loginPage.checkAttribute(loginPage.getEmailField(), "type");
         String expectedEmail = "email";
-        String actualPassword = loginPage.checkAtribut(loginPage.getPasswordField(), "type");
+        String actualPassword = loginPage.checkAttribute(loginPage.getPasswordField(), "type");
         String expectedPassword = "password";
 
         softAssert.assertEquals(actualEmail, expectedEmail, "TestEmail");

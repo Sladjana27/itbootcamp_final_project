@@ -22,7 +22,7 @@ public abstract class BasePage {
         explicitWait.until(ExpectedConditions.urlContains(text));
     }
 
-    public String checkAtribut(WebElement webElement, String text) {
+    public String checkAttribute(WebElement webElement, String text) {
         return webElement.getAttribute(text);
     }
 
