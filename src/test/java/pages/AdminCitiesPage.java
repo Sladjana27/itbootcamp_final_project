@@ -40,8 +40,8 @@ public class AdminCitiesPage extends BasePage {
     @FindBy(className = "success")
     private WebElement deleteMessage;
 
-    public AdminCitiesPage(WebDriver driver, WebDriverWait explicitWait) {
-        super(driver, explicitWait);
+    public AdminCitiesPage(WebDriver driver) {
+        super(driver);
     }
 
     public WebElement getMessage() {
@@ -110,6 +110,6 @@ public class AdminCitiesPage extends BasePage {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        } //zapisati zasto treba thread.sleep
     }
 }

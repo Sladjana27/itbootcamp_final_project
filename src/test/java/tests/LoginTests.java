@@ -19,7 +19,7 @@ public class LoginTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        loginPage = new LoginPage(driver, explicitWait);
+        loginPage = new LoginPage(driver);
     }
 
     @BeforeMethod

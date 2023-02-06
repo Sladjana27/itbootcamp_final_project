@@ -17,8 +17,8 @@ public class AdminCitiesTests extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        loginPage = new LoginPage(driver, explicitWait);
-        adminCitiesPage = new AdminCitiesPage(driver, explicitWait);
+        loginPage = new LoginPage(driver);
+        adminCitiesPage = new AdminCitiesPage(driver);
         cityFakerName = faker.address().cityName();
     }
 

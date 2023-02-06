@@ -56,8 +56,8 @@ public class HomePage extends BasePage {
 
     private Languages languages;
 
-    public HomePage(WebDriver driver, WebDriverWait explicitWait) {
-        super(driver, explicitWait);
+    public HomePage(WebDriver driver) {
+        super(driver);
     }
 
     public WebElement getLoginButtonHomePage() {

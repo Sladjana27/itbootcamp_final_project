@@ -18,8 +18,8 @@ public class EditProfileTest extends BaseTest {
     @Override
     public void beforeClass() {
         super.beforeClass();
-        profilePage = new ProfilePage(driver, explicitWait);
-        loginPage = new LoginPage(driver, explicitWait);
+        profilePage = new ProfilePage(driver);
+        loginPage = new LoginPage(driver);
         phoneNumber = faker.phoneNumber().phoneNumber();
         twitter = "https://" + faker.internet().url();
         gitHub = "https://" + faker.internet().url();
@@ -39,10 +39,10 @@ public class EditProfileTest extends BaseTest {
     public void editsProfile() {
         profilePage.fillMyProfile(phoneNumber, country, twitter, gitHub, "Chicago");
 
-        String actualPhoneNumber = profilePage.checkAtributte(profilePage.getPhoneField(), "value");
-        String actualCountry = profilePage.checkAtributte(profilePage.getCountryField(), "value");
-        String actualTwitter = profilePage.checkAtributte(profilePage.getTwitterField(), "value");
-        String actualGitHub = profilePage.checkAtributte(profilePage.getGitHubField(), "value");
+        String actualPhoneNumber = profilePage.checkAttribute(profilePage.getPhoneField(), "value");
+        String actualCountry = profilePage.checkAttribute(profilePage.getCountryField(), "value");
+        String actualTwitter = profilePage.checkAttribute(profilePage.getTwitterField(), "value");
+        String actualGitHub = profilePage.checkAttribute(profilePage.getGitHubField(), "value");
         String actualMessage = homePage.getMessage(profilePage.getMessage());
 
         softAssert.assertEquals(actualPhoneNumber, phoneNumber, "TestPhoneNumberValue");
