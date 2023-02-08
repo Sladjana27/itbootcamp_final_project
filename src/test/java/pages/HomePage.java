@@ -106,7 +106,6 @@ public class HomePage extends BasePage {
     public void setLanguage(Languages choosselanguage) {
         languageButton.click();
         explicitWait.until(ExpectedConditions.visibilityOf(es));
-
         switch (choosselanguage) {
             case EN:
                 en.click();
@@ -127,6 +126,6 @@ public class HomePage extends BasePage {
     }
 
     public void navigate(String url) {
-        driver.navigate().to(url);
+        driver.navigate().to("https://vue-demo.daniel-avellaneda.com" + url);
     }
 }

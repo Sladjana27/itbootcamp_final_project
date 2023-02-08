@@ -4,9 +4,10 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class AuthRoutesTests extends BaseTest {
+
     @Test
     public void forbidsVisitsToHomeURLIfNotAuthenticated() {
-        homePage.navigate("https://vue-demo.daniel-avellaneda.com/home");
+        homePage.navigate("/home");
 
         String actualURL = driver.getCurrentUrl();
 
@@ -15,7 +16,7 @@ public class AuthRoutesTests extends BaseTest {
 
     @Test
     public void forbidsVisitsToProfileURLIfNotAuthenticated() {
-        homePage.navigate("https://vue-demo.daniel-avellaneda.com/profile");
+        homePage.navigate("/profile");
 
         String actualURL = driver.getCurrentUrl();
 
@@ -24,7 +25,7 @@ public class AuthRoutesTests extends BaseTest {
 
     @Test
     public void forbidsVisitsToAdminCitiesURLIfNotAuthenticated() {
-        homePage.navigate("https://vue-demo.daniel-avellaneda.com/admin/cities");
+        homePage.navigate("/admin/cities");
 
         String actualURL = driver.getCurrentUrl();
 
@@ -33,7 +34,7 @@ public class AuthRoutesTests extends BaseTest {
 
     @Test
     public void forbidsVisitsToAdminUsersURLIfNotAuthenticated() {
-        homePage.navigate("https://vue-demo.daniel-avellaneda.com/admin/users");
+        homePage.navigate("/admin/users");
 
         String actualURL = driver.getCurrentUrl();
 

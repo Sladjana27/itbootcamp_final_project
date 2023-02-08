@@ -8,12 +8,6 @@ import pages.Languages;
 
 public class LocaleTests extends BaseTest {
 
-    @BeforeClass
-    @Override
-    public void beforeClass() {
-        super.beforeClass();
-    }
-
     @Test
     public void setLocaleToES() {
         homePage.setLanguage(Languages.ES);

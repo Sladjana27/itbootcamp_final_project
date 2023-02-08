@@ -54,7 +54,7 @@ public class LoginTests extends BaseTest {
     public void loginWhenUserNotExists() {
         loginPage.fillLogin(faker.internet().emailAddress(), faker.internet().password());
 
-        explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "User does not exists"));
+        explicitWait.until(ExpectedConditions.textToBePresentInElement(loginPage.getMessage(),"User does not exists"));
         String actualMessage = loginPage.getMessage(loginPage.getMessage());
         String expectedMessage = "User does not exists";
         String actualURL = driver.getCurrentUrl();
@@ -68,7 +68,7 @@ public class LoginTests extends BaseTest {
     public void loginWithInvalidPassword() {
         loginPage.fillLogin("admin@admin.com", faker.internet().password());
 
-        explicitWait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[4]/div/div/div/div/div[1]/ul/li"), "Wrong password"));
+        explicitWait.until(ExpectedConditions.textToBePresentInElement(loginPage.getMessage(),"Wrong password"));
         String actualMessage = loginPage.getMessage(loginPage.getMessage());
         String expectedMessage = "Wrong password";
         String actualURL = driver.getCurrentUrl();

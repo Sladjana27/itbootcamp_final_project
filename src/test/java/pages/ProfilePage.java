@@ -58,25 +58,39 @@ public class ProfilePage extends BasePage {
         return gitHubField;
     }
 
-    public void fillMyProfile(String phone, String country, String twitter, String gitHub, String city) {
+    public void fillPhone(String phone) {
         explicitWait.until(ExpectedConditions.visibilityOf(phoneField));
-        this.phoneField.sendKeys(Keys.CONTROL + "a");
-        this.phoneField.sendKeys(phone);
+        phoneField.sendKeys(Keys.CONTROL + "a");
+        phoneField.sendKeys(phone);
+    }
 
-        this.twitterField.sendKeys(Keys.CONTROL + "a");
-        this.twitterField.sendKeys(twitter);
+    public void fillCountry(String country) {
+        countryField.sendKeys(Keys.CONTROL + "a");
+        countryField.sendKeys(country);
+    }
 
-        this.countryField.sendKeys(Keys.CONTROL + "a");
-        this.countryField.sendKeys(country);
+    public void fillTwitter(String twitter) {
+        twitterField.sendKeys(Keys.CONTROL + "a");
+        twitterField.sendKeys(twitter);
+    }
 
-        this.gitHubField.sendKeys(Keys.CONTROL + "a");
-        this.gitHubField.sendKeys(gitHub);
+    public void fillGitHub(String gitHub) {
+        gitHubField.sendKeys(Keys.CONTROL + "a");
+        gitHubField.sendKeys(gitHub);
+    }
 
-        this.cityField.sendKeys(Keys.SPACE);
-        this.cityField.sendKeys(Keys.CONTROL + "a");
-        this.cityField.sendKeys(city);
-        this.cityField.sendKeys(Keys.ARROW_DOWN);
-        this.cityField.sendKeys(Keys.ENTER);
-        this.saveButton.click();
+    public void fillCity(String city) {
+        cityField.sendKeys(Keys.SPACE, Keys.CONTROL + "a", city, Keys.ARROW_DOWN, Keys.ENTER);
+        explicitWait.until(ExpectedConditions.visibilityOf(saveButton));
+        saveButton.click();
+        explicitWait.until(ExpectedConditions.visibilityOf(message));
+    }
+
+    public void fillMyProfile(String phone, String country, String twitter, String gitHub, String city) {
+        fillPhone(phone);
+        fillTwitter(twitter);
+        fillCountry(country);
+        fillGitHub(gitHub);
+        fillCity(city);
     }
 }
