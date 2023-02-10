@@ -26,6 +26,9 @@ public class SignupPage extends BasePage {
     @FindBy(xpath = "//*[@id=\"app\"]/div[1]/main/div/div[2]/div/div/div[3]/div/div/div/div/div[1]/ul/li")
     private WebElement message;
 
+    @FindBy(className = "v-messages__message")
+    private WebElement messageForBlankField;
+
     public SignupPage(WebDriver driver) {
         super(driver);
     }
@@ -46,12 +49,21 @@ public class SignupPage extends BasePage {
         return message;
     }
 
+    public WebElement getMessageForBlankField() {
+        return messageForBlankField;
+    }
+
+    public void clickSignMeUp() {
+        explicitWait.until(ExpectedConditions.visibilityOf(signMeUpButton));
+        signMeUpButton.click();
+    }
+
     public void fillSignupFields(String name, String email, String password, String confirmPassword) {
         explicitWait.until(ExpectedConditions.visibilityOf(this.name));
         this.name.sendKeys(name);
         this.email.sendKeys(email);
         this.password.sendKeys(password);
         this.confirmPassword.sendKeys(confirmPassword);
-        signMeUpButton.click();
+        clickSignMeUp();
     }
 }

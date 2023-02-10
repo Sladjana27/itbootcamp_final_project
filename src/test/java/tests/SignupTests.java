@@ -71,4 +71,14 @@ public class SignupTests extends BaseTest {
         homePage.closeMessage();
         homePage.logout();
     }
+
+    @Test
+    public void signupWithBlankFields() {
+        signupPage.clickSignMeUp();
+
+        String expectedMessage = "This field is required";
+        String actualMessage = homePage.getMessage(signupPage.getMessageForBlankField());
+
+        Assert.assertEquals(actualMessage, expectedMessage);
+    }
 }

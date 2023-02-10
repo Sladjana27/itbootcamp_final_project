@@ -65,6 +65,7 @@ public class AdminCitiesPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        // When I run all tests together, for some reason, waiters does not work here, only Thread.sleep
     }
 
     public void editCityName(String newName) {
@@ -92,6 +93,9 @@ public class AdminCitiesPage extends BasePage {
     }
 
     public void flowMethod(String cityName) {
+
+        // When I run all tests together, for some reason, waiters does not work here, only Thread.sleep
+
         createNewCity(cityName);
         try {
             Thread.sleep(1000);
@@ -110,6 +114,6 @@ public class AdminCitiesPage extends BasePage {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        } //zapisati zasto treba thread.sleep
+        }
     }
 }
