@@ -40,4 +40,13 @@ public class AuthRoutesTests extends BaseTest {
 
         Assert.assertTrue(actualURL.contains("/login"));
     }
+
+    @Test
+    public void visitsAboutPage() {
+        homePage.navigate("/about");
+
+        String actualURL = driver.getCurrentUrl();
+
+        Assert.assertTrue(actualURL.contains("/about"));
+    }
 }
