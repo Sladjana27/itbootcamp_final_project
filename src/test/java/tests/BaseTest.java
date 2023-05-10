@@ -3,6 +3,7 @@ package tests;
 import com.github.javafaker.Faker;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -25,7 +26,9 @@ public abstract class BaseTest {
 
     @BeforeClass
     public void beforeClass() {
-        driver = new ChromeDriver();
+        ChromeOptions ops = new ChromeOptions();
+        ops.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(ops);
         homePage = new HomePage(driver);
         explicitWait = new WebDriverWait(driver, Duration.ofSeconds(15));
         softAssert = new SoftAssert();
